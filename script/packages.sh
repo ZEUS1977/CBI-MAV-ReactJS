@@ -1,0 +1,1 @@
+sudo npm install react-router@3.0.5 #la 4 non funziona con il ruoting di componenti
