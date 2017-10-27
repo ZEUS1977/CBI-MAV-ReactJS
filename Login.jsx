@@ -10,17 +10,15 @@ class Login extends React.Component {
            Email: 'ewfew',
            Password: '' 
         }
-
-        this.handleLogin = this.handleLogin.bind(this);
+       
      };
      
-    handleLogin(e) {
-
-            this.setState({
-                Email: e.target.Email,
-                Password:e.target.Password}
-            )
-            Email = e.target.Email;
+    handleLogin(ev) {
+        ev.preventDefault();
+        this.setState({
+            Email: this.refs.email.value,
+            Password:this.refs.password.value}
+        )
     }; 
    render() {
       return (
@@ -34,24 +32,24 @@ class Login extends React.Component {
             </ul>
             <label>EMail: 
             <input
-                    id="email"
+                    ref="email"
                     type="text"
                     defaultValue={this.state.Email}
-                    onChange={this.state.handleLogin}
+                    onChange={(ev) => this.handleLogin(ev)}
                      />
             </label>
             <br/>
                 
             <label>Password: 
             <input
-                    id="password"
+                    ref="password"
                     type="password"
                     defaultValue={this.state.Password}
-                    onChange={this.state.handleLogin}
+                    onChange={(ev) => this.handleLogin(ev)}
                      />
             </label>
             <br/>
-            <button onClick={this.state.handleLogin}> Avanti  </button> 
+            <button onClick={(ev) => this.handleLogin(ev)}> Avanti  </button> 
        </div>
       )
    }
