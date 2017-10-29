@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import appCSS from './static/css/app.css'
 
 class Registration extends React.Component {
-    
+
     constructor(props) {
         super(props);
-          
+
         this.state = {
-           User: 'Scelgi un nick name', 
+           User: 'Scelgi un nick name',
            Nome: '',
            Cognome: '',
            RagioneSociale: '',
@@ -19,13 +20,12 @@ class Registration extends React.Component {
            ComuneFatturazione: '',
            SiglaProvinciaFatturazione: '',
            Email: 'Inserisci qui la tua Email',
-           ValidEmail: '',
            Password: 'Inserisici qui la tua password',
            CheckPassword: 'Ripeti la password'
-        }
-       
+        };
+
      };
-     
+
     handleLogin(ev) {
         ev.preventDefault();
         this.setState({
@@ -37,25 +37,25 @@ class Registration extends React.Component {
             RagioneSociale: this.refs.ragionesociale.value}
         )
 
-    }; 
+    };
 
     validation(ev) {
         debugger
-        const error = {};
+        const errors = {};
         const emailPattern = /(.+)@(.+){2,}\.(.+){2,}/;
         if (!emailPattern.test(this.refs.email.value)) {
-          error.email = 'L\'email inserita non é valida!';
+          errors.email = 'L\'email inserita non é valida!';
         }
-
-        this.setState({
-               ValidEmail: error
-        });
       }
-   
+
    render() {
       return (
 
-   <div>
+        <div className="mainWrapper">
+          <div className="login-container">
+        <div className="login-card">
+          <div className="login-form">
+            <form className="form-horizontal">
             Benvenuto {this.state.User}
             <h1>Registrazione...</h1>
             <ul>
@@ -63,67 +63,80 @@ class Registration extends React.Component {
                     <h2>Inserisci i tuoi dati...</h2>
                 </li>
             </ul>
-            <br/>       
-            <label>Nome Utente: 
+            <br/>
+            <div className="input-group input-sm">
+            <label className="input-group-addon">Nome Utente:
                 <input
                         ref="user"
                         type="text"
                         defaultValue={this.state.User}
-                       
+
                          />
-           </label>
-            <br/>                 
-           <label>Nome: 
+             <i className="fa fa-user"></i> </label>
+             </div>
+             <div className="input-group input-sm">
+           <label className="input-group-addon">Nome:
                <input
                        ref="nome"
                        type="text"
-                       defaultValue={this.state.Nome}                       
+                       defaultValue={this.state.Nome}
                         />
-           </label>
-           <label>Cognome: 
+           <i className="fa fa-user"></i> </label>
+           </div>
+           <div className="input-group input-sm">
+         <label className="input-group-addon">Cognome:
                <input
                        ref="cognome"
                        type="text"
-                       defaultValue={this.state.Cognome}                       
+                       defaultValue={this.state.Cognome}
                         />
-           </label>
-           <br/> 
-           <label>RagioneSociale: 
+           <i className="fa fa-user"></i> </label>
+           </div>
+           <div className="input-group input-sm">
+           <label className="input-group-addon">RagioneSociale:
                <input
                        ref="ragionesociale"
                        type="text"
-                       defaultValue={this.state.RagioneSociale}                       
+                       defaultValue={this.state.RagioneSociale}
                         />
-           </label>
-           <br/> 
-           <label>EMail: 
+           <i className="fa fa-user"></i> </label>
+           </div>
+           <div className="input-group input-sm">
+           <label className="input-group-addon">EMail:
            <input
                     ref="email"
                     type="text"
                     defaultValue= {this.state.Email}
-                    onBlur = {(ev) => this.validation(ev)}
+                    onBlur = {this.validation.bind(this)}
                      />
-            </label>
-            <h1>error: {this.state.ValidEmail}</h1>
-            <br/>
-            <label>Password: 
+            <i className="fa fa-user"></i> </label>
+            </div>
+            <div className="input-group input-sm">
+            <label className="input-group-addon">Password:
             <input
                     ref="password"
                     type="password"
                     defaultValue={this.state.Password}
-                   
+
                      />
-            </label>
-            <br/> 
-            <label>Ripeti la Password: 
+            <i className="fa fa-user"></i> </label>
+            </div>
+            <div className="input-group input-sm">
+            <label className="input-group-addon">Ripeti la Password:
                 <input
                     ref="checkpassword"
                     type="password"
                     defaultValue={this.state.CheckPassword}
                      />
-             </label>
-            <br/>
-            <button onClick={(ev) => this.handleLogin(ev)}> Avanti  </button> 
+             <i className="fa fa-user"></i> </label>
+             </div>
+             <div className="input-group input-sm">
+            <button onClick={(this.handleLogin.bind(this))}> Avanti  </button>
+            </div>
+</form>
+     </div>
+       </div>
+       </div>
        </div>
       )
    }

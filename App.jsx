@@ -8,6 +8,7 @@ class App extends React.Component {
    render() {
       return (
          <div>
+         	<h1>Benvenuto: {this.props.user}</h1>
             <ul>
                <li><Link to = "/home">Home</Link></li>
                <li><Link to = "/registration"> Registration</Link></li>
