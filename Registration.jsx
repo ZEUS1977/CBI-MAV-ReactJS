@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import appCSS from './static/css/app.css'
+import userClient from './clients/UserClient.js';
 
 class Registration extends React.Component {
 
@@ -14,8 +15,8 @@ class Registration extends React.Component {
            RagioneSociale: '',
            SettoreAzienda: '',
            FatturazioneElettronica: '',
-           IndirizzoFatturazione: 'es.: via Roma',
-           CivicoFatturazione: 'es.: 4',
+           IndirizzoFatturazione: 'es: via Roma',
+           CivicoFatturazione: 'es: 4',
            CAPFatturazione: '',
            ComuneFatturazione: '',
            SiglaProvinciaFatturazione: '',
@@ -28,19 +29,21 @@ class Registration extends React.Component {
 
     handleLogin(ev) {
         ev.preventDefault();
-        this.setState({
+        var datas = {
             Email: this.refs.email.value,
             Password:this.refs.password.value,
             User: this.refs.user.value,
             Nome: this.refs.nome.value,
             Cognome: this.refs.cognome.value,
-            RagioneSociale: this.refs.ragionesociale.value}
-        )
-
+            RagioneSociale: this.refs.ragionesociale.value};
+        this.setState(datas);
+        var json =  JSON.stringify(this.state)
+        alert(json);
+        userClient.register(json);
+        alert('called server');
     };
 
     validation(ev) {
-        debugger
         const errors = {};
         const emailPattern = /(.+)@(.+){2,}\.(.+){2,}/;
         if (!emailPattern.test(this.refs.email.value)) {
