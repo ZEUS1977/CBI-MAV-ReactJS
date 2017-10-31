@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import appCSS from './static/css/app.css'
 import userClient from './clients/UserClient.js';
+import jsonUtils from './utils/JsonUtils.js';
 
 class Registration extends React.Component {
 
@@ -9,20 +10,19 @@ class Registration extends React.Component {
         super(props);
 
         this.state = {
-           User: 'Scelgi un nick name',
+           UserName: '',
            Nome: '',
            Cognome: '',
            RagioneSociale: '',
            SettoreAzienda: '',
            FatturazioneElettronica: '',
-           IndirizzoFatturazione: 'es: via Roma',
-           CivicoFatturazione: 'es: 4',
+           IndirizzoFatturazione: '',
+           CivicoFatturazione: '',
            CAPFatturazione: '',
            ComuneFatturazione: '',
            SiglaProvinciaFatturazione: '',
-           Email: 'Inserisci qui la tua Email',
-           Password: 'Inserisici qui la tua password',
-           CheckPassword: 'Ripeti la password'
+           Email: '',
+           Password: '',
         };
 
      };
@@ -30,17 +30,26 @@ class Registration extends React.Component {
     handleLogin(ev) {
         ev.preventDefault();
         var datas = {
-            Email: this.refs.email.value,
-            Password:this.refs.password.value,
-            User: this.refs.user.value,
+            UserName: this.refs.user.value,
             Nome: this.refs.nome.value,
             Cognome: this.refs.cognome.value,
-            RagioneSociale: this.refs.ragionesociale.value};
+            RagioneSociale: this.refs.ragionesociale.value,
+            SettoreAzienda:  this.refs.settoreAzienda.value,
+            FatturazioneElettronica: this.refs.fatturazioneElettronica.value,
+            IndirizzoFatturazione: this.refs.indirizzoFatturazione.value,
+            CivicoFatturazione: this.refs.civicoFatturazione.value,
+            CAPFatturazione: this.refs.CAPFatturazione.value,
+            ComuneFatturazione: this.refs.comuneFatturazione.value,
+            SiglaProvinciaFatturazione: this.refs.siglaProvinciaFatturazione.value,
+            Email: this.refs.email.value,
+            Password:this.refs.password.value,
+
+            };
         this.setState(datas);
-        var json =  JSON.stringify(this.state)
+        var json =  jsonUtils.objToJson(this.state);
         alert(json);
         userClient.register(json);
-        alert('called server');
+        alert('called server with: '+ json);
     };
 
     validation(ev) {
@@ -96,7 +105,7 @@ class Registration extends React.Component {
            <i className="fa fa-user"></i> </label>
            </div>
            <div className="input-group input-sm">
-           <label className="input-group-addon">RagioneSociale:
+           <label className="input-group-addon">Ragione Sociale:
                <input
                        ref="ragionesociale"
                        type="text"
@@ -104,6 +113,69 @@ class Registration extends React.Component {
                         />
            <i className="fa fa-user"></i> </label>
            </div>
+           <div className="input-group input-sm">
+           <label className="input-group-addon">Settore Azienda:
+               <input
+                       ref="settoreAzienda"
+                       type="text"
+                       defaultValue={this.state.SettoreAzienda}
+                        />
+           <i className="fa fa-user"></i> </label>
+           </div>
+           <div className="input-group input-sm">
+           <label className="input-group-addon">Fatturazione Elettronca:
+               <input
+                       ref="fatturazioneElettronica"
+                       type="text"
+                       defaultValue={this.state.FatturazioneElettronica}
+                        />
+           <i className="fa fa-user"></i> </label>
+           </div>
+           <div className="input-group input-sm">
+           <label className="input-group-addon">Indirizzo Fatturazione:
+               <input
+                       ref="indirizzoFatturazione"
+                       type="text"
+                       defaultValue={this.state.IndirizzoFatturazione}
+                        />
+           <i className="fa fa-user"></i> </label>
+           </div>
+           <div className="input-group input-sm">
+           <label className="input-group-addon">Civico Fatturazione:
+               <input
+                       ref="civicoFatturazione"
+                       type="text"
+                       defaultValue={this.state.CivicoFatturazione}
+                        />
+           <i className="fa fa-user"></i> </label>
+           </div>
+           <div className="input-group input-sm">
+           <label className="input-group-addon">CAP Fatturazione:
+               <input
+                       ref="CAPFatturazione"
+                       type="text"
+                       defaultValue={this.state.CAPFatturazione}
+                        />
+           <i className="fa fa-user"></i> </label>
+           </div>
+           <div className="input-group input-sm">
+           <label className="input-group-addon">Comune Fatturazione:
+               <input
+                       ref="comuneFatturazione"
+                       type="text"
+                       defaultValue={this.state.ComuneFatturazione}
+                        />
+           <i className="fa fa-user"></i> </label>
+           </div>
+         <div className="input-group input-sm">
+         <label className="input-group-addon">Sigla Provincia Fatturazione:
+             <input
+                     ref="siglaProvinciaFatturazione"
+                     type="text"
+                     defaultValue={this.state.SiglaProvinciaFatturazione}
+                      />
+         <i className="fa fa-user"></i> </label>
+         </div>
            <div className="input-group input-sm">
            <label className="input-group-addon">EMail:
            <input
@@ -136,7 +208,7 @@ class Registration extends React.Component {
              <div className="input-group input-sm">
             <button onClick={(this.handleLogin.bind(this))}> Avanti  </button>
             </div>
-</form>
+        </form>
      </div>
        </div>
        </div>
