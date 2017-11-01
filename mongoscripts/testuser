@@ -1,0 +1,9 @@
+use test
+db.createUser(
+  {
+    user: "test",
+    pwd: "test",
+    roles: [ { role: "readWrite", db: "flussi_bancari" },
+             { role: "read", db: "reporting" } ]
+  }
+)
